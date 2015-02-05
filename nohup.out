@@ -108,3 +108,15 @@
 2015-02-05T23:49:41.768+0800 [clientcursormon] mem (MB) res:10 virt:2818
 2015-02-05T23:49:41.768+0800 [clientcursormon]  mapped (incl journal view):320
 2015-02-05T23:49:41.768+0800 [clientcursormon]  connections:5
+2015-02-05T23:54:41.996+0800 [clientcursormon] mem (MB) res:10 virt:2818
+2015-02-05T23:54:41.996+0800 [clientcursormon]  mapped (incl journal view):320
+2015-02-05T23:54:41.996+0800 [clientcursormon]  connections:5
+2015-02-05T23:59:42.209+0800 [clientcursormon] mem (MB) res:10 virt:2818
+2015-02-05T23:59:42.209+0800 [clientcursormon]  mapped (incl journal view):320
+2015-02-05T23:59:42.209+0800 [clientcursormon]  connections:5
+2015-02-06T00:04:42.449+0800 [clientcursormon] mem (MB) res:10 virt:2818
+2015-02-06T00:04:42.449+0800 [clientcursormon]  mapped (incl journal view):320
+2015-02-06T00:04:42.449+0800 [clientcursormon]  connections:5
+2015-02-06T00:09:42.681+0800 [clientcursormon] mem (MB) res:10 virt:2818
+2015-02-06T00:09:42.682+0800 [clientcursormon]  mapped (incl journal view):320
+2015-02-06T00:09:42.682+0800 [clientcursormon]  connections:5
