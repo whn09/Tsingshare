@@ -48,7 +48,7 @@ module.exports = {
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || '163',
+			service: process.env.MAILER_SERVICE_PROVIDER || '163', /*TODO this configuration maybe wrong*/
 			auth: {
 				user: process.env.MAILER_EMAIL_ID || '15210588630@163.com',
 				pass: process.env.MAILER_PASSWORD || 'whn159024'
