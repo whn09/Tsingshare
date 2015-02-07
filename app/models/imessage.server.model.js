@@ -17,18 +17,22 @@ var IMessageSchema = new Schema({
 	title: {
 		type: String,
 		default: '',
-		trim: true,
-		required: 'Title cannot be blank'
+		trim: true
 	},
 	content: {
 		type: String,
 		default: '',
-		trim: true
+		trim: true,
+        required: 'Content cannot be blank'
 	},
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    touser: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
 });
 
 mongoose.model('IMessage', IMessageSchema);

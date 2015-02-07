@@ -88,7 +88,11 @@ var UserSchema = new Schema({
 	},
 	resetPasswordExpires: {
 		type: Date
-	}
+	},
+    lover: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
 });
 
 /**
@@ -142,5 +146,15 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 		}
 	});
 };
+
+/**
+ * TODO
+ * send request to lover
+ */
+
+/**
+ * TODO
+ * relate user to lover
+ */
 
 mongoose.model('User', UserSchema);

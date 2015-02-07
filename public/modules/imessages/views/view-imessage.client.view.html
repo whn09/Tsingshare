@@ -16,6 +16,8 @@
 			<span data-ng-bind="imessage.created | date:'mediumDate'"></span>
 			by
 			<span data-ng-bind="imessage.user.displayName"></span>
+            to
+            <span data-ng-bind="imessage.touser.displayName"></span>
 		</em>
 	</small>
 	<p class="lead" data-ng-bind="imessage.content"></p>

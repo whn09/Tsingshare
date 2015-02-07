@@ -14,6 +14,7 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var imessage = new IMessage(req.body);
     imessage.user = req.user;
+    imessage.touser = req.user.lover;
 
     imessage.save(function(err) {
 		if (err) {

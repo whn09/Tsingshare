@@ -5,15 +5,21 @@
 	<div class="col-md-12">
 		<form name="imessageForm" class="form-horizontal" data-ng-submit="update(imessageForm.$valid)" novalidate>
 			<fieldset>
+                <!--<div class="form-group" ng-class="{ 'has-error' : submitted && imessageForm.touser.$invalid}">
+                    <label class="control-label" for="touser">To</label>
+                    <div class="controls">
+                        <input name="touser" type="text" data-ng-model="imessage.touser" id="touser" class="form-control" placeholder="To" required>
+                    </div>
+                    <div ng-show="submitted && imessageForm.touser.$invalid" class="help-block">
+                        <p ng-show="imessageForm.touser.$error.required" class="text-danger">To is required</p>
+                    </div>
+                </div>
 				<div class="form-group" ng-class="{ 'has-error' : submitted && imessageForm.title.$invalid}">
 					<label class="control-label" for="title">Title</label>
 					<div class="controls">
-						<input name="title" type="text" data-ng-model="imessage.title" id="title" class="form-control" placeholder="Title" required>
+						<input name="title" type="text" data-ng-model="imessage.title" id="title" class="form-control" placeholder="Title">
 					</div>
-					<div ng-show="submitted && imessageForm.title.$invalid" class="help-block">
-						<p ng-show="imessageForm.title.$error.required" class="text-danger">Title is required</p>
-					</div>
-				</div>
+				</div>-->
 				<div class="form-group" ng-class="{ 'has-error' : submitted && imessageForm.content.$invalid}">
 					<label class="control-label" for="content">Content</label>
 					<div class="controls">
