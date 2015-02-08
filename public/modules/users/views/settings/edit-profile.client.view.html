@@ -4,6 +4,10 @@
 		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
                 <div class="form-group">
+                    <label for="userid">UserID (Send it to your lover)</label>
+                    <input type="text" id="userid" name="userid" class="form-control" data-ng-model="user._id" placeholder="UserID" readonly>
+                </div>
+                <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username" readonly>
                 </div>
