@@ -48,12 +48,32 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
-    telephone: {
+    telephone: { /* new! telephone*/
         type: String,
         trim: true,
         default: '',
         validate: [validateLocalStrategyProperty, 'Please fill in your telephone'],
-        match: [/1d{12}/, 'Please fill a valid telephone number'] /*TODO this regex maybe wrong*/
+        match: [/1\d{10}/, 'Please fill a valid telephone number'] /*TODO this regex maybe wrong*/
+    },
+    birthday: { /* new! birthday*/
+        type: Date, /* TODO date format and time zone maybe wrong*/
+        trim: true,
+        default: ''
+    },
+    gender: { /* new! gender*/
+        type: String,
+        enum: ['m', 'f'],
+        default: 'f',
+        trim: true
+    },
+    headimg: { /* new! head image*/
+        type: String,
+        default: 'public/modules/users/img/defaulthead.png',
+        trim: true
+    },
+    lover: { /* new! lover*/
+        type: Schema.ObjectId,
+        ref: 'User'
     },
 	username: {
 		type: String,
@@ -95,11 +115,7 @@ var UserSchema = new Schema({
 	},
 	resetPasswordExpires: {
 		type: Date
-	},
-    lover: {
-        type: Schema.ObjectId,
-        ref: 'User'
-    }
+	}
 });
 
 /**
@@ -153,15 +169,5 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 		}
 	});
 };
-
-/**
- * TODO
- * send request to lover
- */
-
-/**
- * TODO
- * relate user to lover
- */
 
 mongoose.model('User', UserSchema);

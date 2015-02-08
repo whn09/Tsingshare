@@ -3,6 +3,10 @@
 	<div class="col-xs-offset-2 col-xs-8 col-md-offset-5 col-md-2">
 		<form name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
 			<fieldset>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username" readonly>
+                </div>
 				<div class="form-group">
 					<label for="firstName">First Name</label>
 					<input type="text" id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" placeholder="First Name">
@@ -15,10 +19,29 @@
 					<label for="email">Email</label>
 					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" placeholder="Email">
 				</div>
-				<div class="form-group">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" class="form-control" data-ng-model="user.username" placeholder="Username">
-				</div>
+                <div class="form-group">
+                    <label for="telephone">Telephone</label>
+                    <input type="telephone" id="telephone" name="telephone" class="form-control" data-ng-model="user.telephone" placeholder="Telephone">
+                </div>
+                <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input type="birthday" id="birthday" name="birthday" class="form-control" data-ng-model="user.birthday" placeholder="Birthday">
+                    <!--TODO-->
+                    <!--<datetimepicker data-ng-model="data.date"></datetimepicker>-->
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" class="form-control" data-ng-model="user.gender">
+                        <option value="f">Female</option>
+                        <option value="m">Male</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="headimg">Head Image</label>
+                    <div><img src="{{user.headimg}}"></div>
+                    <!--TODO-->
+                    <input type="headimg" id="headimg" name="headimg" class="form-control" data-ng-model="user.headimg" placeholder="Head Image">
+                </div>
 				<div class="text-center form-group">
 					<button type="submit" class="btn btn-large btn-primary">Save Profile</button>
 				</div>
