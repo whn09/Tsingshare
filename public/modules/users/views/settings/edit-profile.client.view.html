@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label for="birthday">Birthday</label>
                     <input type="birthday" id="birthday" name="birthday" class="form-control" data-ng-model="user.birthday" placeholder="Birthday">
-                    <!--TODO-->
+                    <!--TODO use angular-bootstrap-datetimepicker-->
                     <!--<datetimepicker data-ng-model="data.date"></datetimepicker>-->
                 </div>
                 <div class="form-group">
@@ -38,8 +38,8 @@
                 </div>
                 <div class="form-group">
                     <label for="headimg">Head Image</label>
-                    <div><img src="{{user.headimg}}"></div>
-                    <!--TODO-->
+                    <div><img class="headimg" ng-src="{{user.headimg}}"></div>
+                    <!--TODO use angular-file-upload-->
                     <input type="headimg" id="headimg" name="headimg" class="form-control" data-ng-model="user.headimg" placeholder="Head Image">
                 </div>
 				<div class="text-center form-group">

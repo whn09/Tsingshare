@@ -68,7 +68,7 @@ var UserSchema = new Schema({
     },
     headimg: { /* new! head image*/
         type: String,
-        default: 'public/modules/users/img/defaulthead.png',
+        default: 'modules/users/img/cutehead.jpg',
         trim: true
     },
     lover: { /* new! lover*/
