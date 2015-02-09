@@ -24,6 +24,12 @@ var RelationSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
+    type: {
+        type: String,
+        enum: ['lover', 'father', 'mother', 'grandfather', 'grandmother', 'grandpa', 'grandma', 'brother', 'youngerbrother', 'sister', 'youngersister'],
+        default: 'lover',
+        trim: true
+    },
     touser: {
         type: Schema.ObjectId,
         ref: 'User'
