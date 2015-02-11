@@ -29,7 +29,6 @@ var GiftSchema = new Schema({
     },
     memory: { /* the related memorial day*/
         type: Schema.ObjectId,
-        default: '',
         ref: 'Memory'
     },
     touser: { /* unused*/
