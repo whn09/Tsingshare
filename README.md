@@ -4,6 +4,34 @@
 [![Dependencies Status](https://david-dm.org/meanjs/mean.svg)](https://david-dm.org/meanjs/mean)
 [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/meanjs/mean?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+Tsingshare is the best app for lovers.
+
+## API
+
+Basically, TsingShare provides interfaces about User, Article, IMessage, Relation.
+
+* User
+**	/users/me get
+**	/users put
+**	/users/accounts delete
+
+** 	// Setting up the users password api
+**	/users/password' post
+**	/auth/forgot' post
+**	/auth/reset/:token get
+** 	/auth/reset/:token post
+
+**	// Setting up the users authentication api
+**	/auth/signup post
+** 	/auth/signin post
+** 	/auth/signout get
+
+**  /users/search get
+
+* Article
+* IMessage
+* Relation
+
 MEAN.JS is a full-stack JavaScript open-source solution, which provides a solid starting point for [MongoDB](http://www.mongodb.org/), [Node.js](http://www.nodejs.org/), [Express](http://expressjs.com/), and [AngularJS](http://angularjs.org/) based applications. The idea is to solve the common issues with connecting those frameworks, build a robust framework to support daily development needs, and help developers use better practices while working with popular JavaScript components.
 
 ## Before You Begin
