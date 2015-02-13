@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /**
- * TODO Dish Schema
+ * TODO DishType Schema
  */
-var DishSchema = new Schema({
+var DishTypeSchema = new Schema({
     created: { /* created time*/
         type: Date,
         default: Date.now
@@ -24,23 +24,10 @@ var DishSchema = new Schema({
         default: '',
         trim: true
     },
-    url: { /* dianping url*/
-        type: String,
-        default: '',
-        trim: true
-    },
-    type: {
-        type: Schema.ObjectId,
-        ref: 'DishType'
-    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'
-    },
-    restaurant: {
-        type: Schema.ObjectId,
-        ref: 'Restaurant'
     }
 });
 
-mongoose.model('Dish', DishSchema);
+mongoose.model('DishType', DishTypeSchema);
