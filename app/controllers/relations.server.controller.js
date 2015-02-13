@@ -15,27 +15,12 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var relation = new Relation(req.body);
     relation.user = req.user;
-    var userid = req.param('userid');
-    var touser;
-    User.findById(userid, function(err, resultuser) {
-        if (!err && resultuser) {
-            if(req.user.username != resultuser.username) {
-                touser = resultuser;
-                //res.json(resultuser._id);
-            }
-            else {
-                res.status(400).send({
-                    message: 'You can\'t bind yourself'
-                });
-            }
-        } else {
-            res.status(400).send({
-                message: 'User is not found'
-            });
-        }
-    });
-    relation.touser = touser;
-
+    relation.touser = req.param('userid');
+    if(relation.user === relation.touser) {
+        return res.status(400).send({
+            message: 'You can\'t send request to yourself'
+        });
+    }
     relation.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -51,17 +36,79 @@ exports.create = function(req, res) {
  * Update a relation
  */
 exports.update = function(req, res) {
-	var relation = req.relation;
+    Relation.findById(req.param('relationid'), function(err, relation) {
+        if(err || !relation) {
+            return res.status(400).send({
+                message: 'No relation'
+            });
+        }
+        else {
+            relation = _.extend(relation, req.body);
 
-    relation = _.extend(relation, req.body);
+            relation.save(function(err) {
+                if (err) {
+                    return res.status(400).send({
+                        message: errorHandler.getErrorMessage(err)
+                    });
+                } else {
+                    if(req.param('status') === 'accepted') {
+                        // set req.user.lover to request user, and request user.lover to req.user
+                        //res.json('accepted');
+                        var user = new User();
+                        user.updateLover(relation.user, relation.touser, function(err) {
+                            if(err) {
+                                return res.status(400).send({
+                                    message: errorHandler.getErrorMessage(err)
+                                });
+                            }
+                        });
+                        user.updateLover(relation.touser, relation.user, function(err) {
+                            if(err) {
+                                return res.status(400).send({
+                                    message: errorHandler.getErrorMessage(err)
+                                });
+                            }
+                        });
+                    }
+                    res.json(relation);
+                }
+            });
+        }
+    });
+};
 
-    relation.save(function(err) {
-		if (err) {
-			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
-			});
-		} else {
-			res.json(relation);
-		}
-	});
+/**
+ * get all requesters
+ */
+exports.requesters = function(req, res) {
+    var userid = req.user._id;
+    var relation = new Relation();
+    relation.getAllRequesters(userid, function(err, requesters) {
+        if(err || !requesters || requesters.length === 0) {
+            return res.status(400).send({
+                message: 'No requester'
+            });
+        }
+        else {
+            res.json(requesters);
+        }
+    });
+};
+
+/**
+ * get my request
+ */
+exports.myrequest = function(req, res) {
+    var userid = req.user._id;
+    var relation = new Relation();
+    relation.getMyRequest(userid, function(err, request) {
+        if(err || !request || request.length === 0) {
+            return res.status(400).send({
+                message: 'No request'
+            });
+        }
+        else {
+            res.json(request);
+        }
+    });
 };

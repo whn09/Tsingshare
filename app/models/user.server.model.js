@@ -170,4 +170,11 @@ UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
 	});
 };
 
+/**
+ * update user's lover
+ */
+UserSchema.methods.updateLover = function updateLover(userid1, userid2, callback) {
+    return this.model('User').update({_id: userid1}, {lover: userid2}, {multi: true}, callback);
+};
+
 mongoose.model('User', UserSchema);

@@ -36,4 +36,18 @@ var RelationSchema = new Schema({
     }
 });
 
+/**
+ * Get all requesters
+ */
+RelationSchema.methods.getAllRequesters = function getAllRequesters(userid, callback) {
+    return this.model('Relation').find({touser: userid, status: 'requested'}, callback);
+};
+
+/**
+ * Get my request
+ */
+RelationSchema.methods.getMyRequest = function getMyRequest(userid, callback) {
+    return this.model('Relation').findOne({user: userid, status: 'requested'}, callback);
+};
+
 mongoose.model('Relation', RelationSchema);
