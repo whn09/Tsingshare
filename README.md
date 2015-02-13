@@ -14,9 +14,9 @@ Basically, TsingShare provides interfaces about User, Article, IMessage, Relatio
 
 // Setting up the users password api
 
-/users/password' post
+/users/password post
 
-/auth/forgot' post
+/auth/forgot post
 
 /auth/reset/:token get
 
