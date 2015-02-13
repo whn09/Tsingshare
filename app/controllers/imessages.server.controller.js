@@ -71,10 +71,10 @@ exports.delete = function(req, res) {
 };
 
 /**
- * List of Messages
+ * List of Messages, touser must be the user or the user's lover
  */
 exports.list = function(req, res) {
-    IMessage.find().sort('-created').populate('user', 'displayName').exec(function(err, imessages) {
+    IMessage.find().sort('created').populate('user', 'displayName').populate('touser', 'displayName').or([{'touser': req.user.lover}, {'touser': req.user._id}]).exec(function(err, imessages) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)

@@ -10,8 +10,8 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$state
 				content: this.content
 			});
             imessage.$save(function(response) {
-				$location.path('imessages/' + response._id);
-
+				//$location.path('imessages/' + response._id);
+                $scope.imessages.push(response);
 				$scope.title = '';
 				$scope.content = '';
 			}, function(errorResponse) {
