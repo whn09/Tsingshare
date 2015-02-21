@@ -52,5 +52,18 @@ exports.update = function(req, res) {
  * Send User
  */
 exports.me = function(req, res) {
-	res.json(req.user || null);
+	//res.json(req.user || null);
+    var userid = req.param('userid');
+    if(userid === undefined) {
+        userid = req.user._id;
+    }
+    User.findById(userid, function(err, resultuser) {
+        if (!err && resultuser) {
+            res.json(resultuser);
+        } else {
+            res.status(400).send({
+                message: 'User is not found'
+            });
+        }
+    });
 };

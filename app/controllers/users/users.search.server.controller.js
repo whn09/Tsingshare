@@ -29,7 +29,7 @@ exports.search = function(req, res) {
     if (user) {
         User.findById(userid, function(err, resultuser) {
             if (!err && resultuser) {
-                if(user.username != resultuser.username) {
+                if(user.username !== resultuser.username) {
                     res.json(resultuser);
                 }
                 else {
