@@ -13,9 +13,24 @@ var mongoose = require('mongoose'),
  * Create an instant message (imessage for short)
  */
 exports.create = function(req, res) {
-	var imessage = new IMessage(req.body);
-    imessage.user = req.user;
-    imessage.touser = req.user.lover;
+
+    var imessage = new IMessage(req.body);
+
+    var userid = req.param('userid');
+    if(userid === undefined) {
+        userid = req.user;
+    }
+    var touserid = req.param('touserid');
+    if(touserid === undefined) {
+        touserid = req.user.lover;
+    }
+    var content = req.param('content');
+    if(content != undefined) {
+        imessage.content = content;
+    }
+
+    imessage.user = userid;
+    imessage.touser = touserid;
 
     imessage.save(function(err) {
 		if (err) {
