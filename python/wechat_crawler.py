@@ -3,6 +3,7 @@
 
 import pymongo
 import random
+import urllib
 import urllib2
 import json
 from bson import Binary, Code
@@ -11,6 +12,14 @@ from bson.json_util import dumps
 from bson.json_util import loads
 from bson.objectid import ObjectId
 from datetime import date, datetime
+
+def post(url, data):
+    req = urllib2.Request(url)
+    data = urllib.urlencode(data)
+    #enable cookie
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor())
+    response = opener.open(req, data)
+    return response.read()
 
 class CJsonEncoder(json.JSONEncoder):
     def default(self, obj):
@@ -40,9 +49,20 @@ for i in content:
     jsonObject = json.loads(jsonObject)
     #print jsonObject
     url = jsonObject['content']
+    articleid = jsonObject['_id']['$oid']
     if url.find('http://mp.weixin.qq.com') == 0:
         print url
-        req = urllib2.Request(url)
-        resp = urllib2.urlopen(req)
-        respHtml = resp.read()
-        print "respHtml=",respHtml # you should see the ouput html
+        #print articleid
+        #posturl = 'http://wirank.cn/public/api/wxnum'
+        #data = {'url':url,'code':'tfjz0m'}
+        posturl = 'http://wirank.cn/public/wx/getnum'
+        data = {'urls':url,'code':'tfjz0m'}
+        result = post(posturl, data)
+        resultJson = json.loads(result)
+        if resultJson['ok'] == 1:
+            readnum = resultJson['data'][0]['readnum']
+            likenum = resultJson['data'][0]['likenum']
+            gettime = resultJson['data'][0]['gettime']
+            db.wx_stat.insert({'articleid': ObjectId(articleid), 'readnum':readnum, 'likenum':likenum, 'gettime':gettime})
+        else:
+            print resultJson['msg']
