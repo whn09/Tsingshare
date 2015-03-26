@@ -1,0 +1,2 @@
+*/1 * * * * python /root/Tsingshare/trunk/python/wechat_crawler.py >> /root/Tsingshare/trunk/python/wechat_crawler.py.log 2>&1
+
