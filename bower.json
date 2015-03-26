@@ -14,6 +14,7 @@
 		"angular-ui-router": "~0.2.11",
 		"angular-bootstrap-datetimepicker": "latest",
 		"ng-file-upload-shim": "latest",
-		"ng-file-upload": "latest"
+		"ng-file-upload": "latest",
+        "ng-table": "latest"
 	}
 }
