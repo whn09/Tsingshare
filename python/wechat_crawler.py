@@ -63,6 +63,6 @@ for i in content:
             readnum = resultJson['data'][0]['readnum']
             likenum = resultJson['data'][0]['likenum']
             gettime = resultJson['data'][0]['gettime']
-            db.wx_stat.insert({'articleid': ObjectId(articleid), 'readnum':readnum, 'likenum':likenum, 'gettime':gettime})
+            db.wx_stats.insert({'articleid': ObjectId(articleid), 'readnum':readnum, 'likenum':likenum, 'gettime':gettime})
         else:
             print resultJson['msg']

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Articles) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Articles',
+	function($scope, $http, $stateParams, $location, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
 		$scope.create = function() {
@@ -63,5 +63,13 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
             {name: 'Nephi', age: 29},
             {name: 'Enos', age: 34}
         ];*/
+        $scope.wx_stats = '';
+        $http.get('/wx_stats').success(function(response) {
+            console.log(response);
+            $scope.wx_stats = response;
+        }).error(function(response) {
+            console.log(response);
+            $scope.error = response.message;
+        });
 	}
 ]);

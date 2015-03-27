@@ -20,10 +20,15 @@
 	</small>
 	<p class="lead" data-ng-bind="article.content"></p>
     <table ng-table class="table">
-        <tr ng-repeat="user in users">
-            <td data-title="'Time'">{{user.name}}</td>
-            <td data-title="'ReadNum'">{{user.age}}</td>
-            <td data-title="'LikeNum'">{{user.age}}</td>
+        <tr>
+            <th>Time</th>
+            <th>ReadNum</th>
+            <th>LikeNum</th>
+        </tr>
+        <tr ng-repeat="wx_stat in wx_stats">
+            <td data-title="'Time'">{{wx_stat.gettime}}</td>
+            <td data-title="'ReadNum'">{{wx_stat.readnum}}</td>
+            <td data-title="'LikeNum'">{{wx_stat.likenum}}</td>
         </tr>
     </table>
 </section>
