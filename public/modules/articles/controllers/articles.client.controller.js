@@ -64,11 +64,12 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
             {name: 'Enos', age: 34}
         ];*/
         $scope.wx_stats = '';
-        $http.get('/wx_stats').success(function(response) {
-            console.log(response);
+        console.log('/wx_stats?articleid='+$stateParams.articleId);
+        $http.get('/wx_stats?articleid='+$stateParams.articleId).success(function(response) {
+            //console.log(response);
             $scope.wx_stats = response;
         }).error(function(response) {
-            console.log(response);
+            //console.log(response);
             $scope.error = response.message;
         });
 	}

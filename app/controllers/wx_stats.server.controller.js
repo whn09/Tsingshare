@@ -12,7 +12,13 @@ var mongoose = require('mongoose'),
  * List of WX_STAT
  */
 exports.list = function(req, res) {
-    WX_STAT.find().sort('gettime').exec(function(err, wx_stats) {
+    var articleid = req.param('articleid');
+    if(articleid === undefined) {
+        res.status(400).send({
+            message: 'No articleid'
+        });
+    }
+    WX_STAT.find({'articleid': articleid}).sort('gettime').exec(function(err, wx_stats) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
