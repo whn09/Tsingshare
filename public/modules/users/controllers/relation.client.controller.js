@@ -51,9 +51,9 @@ angular.module('users').controller('RelationController', ['$scope', '$http', '$l
          * TODO
          * relate user to lover
          */
-        $scope.acceptuser = function() {
-            //console.log($scope.relationid);
-            $http.post('/relation/accept', {'relationid':'54dd7907106d0dd85dfab503','status':'accepted'}).success(function(response) {
+        $scope.acceptuser = function(relationid) {
+            //console.log(relationid);
+            $http.post('/relation/accept', {'relationid':relationid,'status':'accepted'}).success(function(response) {
                 $scope.success = true;
                 //console.log(response);
                 //$location.path('/');
@@ -66,8 +66,8 @@ angular.module('users').controller('RelationController', ['$scope', '$http', '$l
          * TODO
          * don't relate user to lover
          */
-        $scope.rejectuser = function() {
-            $http.post('/relation/reject', {'relationid':'54dd7907106d0dd85dfab503','status':'rejected'}).success(function(response) {
+        $scope.rejectuser = function(relationid) {
+            $http.post('/relation/reject', {'relationid':relationid,'status':'rejected'}).success(function(response) {
                 $scope.success = true;
                 //console.log(response);
                 //$location.path('/');

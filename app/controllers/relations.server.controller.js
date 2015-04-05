@@ -47,7 +47,7 @@ exports.update = function(req, res) {
 
             relation.save(function(err) {
                 if (err) {
-                    return res.status(400).send({
+                    return res.status(401).send({
                         message: errorHandler.getErrorMessage(err)
                     });
                 } else {
@@ -57,14 +57,14 @@ exports.update = function(req, res) {
                         var user = new User();
                         user.updateLover(relation.user, relation.touser, function(err) {
                             if(err) {
-                                return res.status(400).send({
+                                return res.status(402).send({
                                     message: errorHandler.getErrorMessage(err)
                                 });
                             }
                         });
                         user.updateLover(relation.touser, relation.user, function(err) {
                             if(err) {
-                                return res.status(400).send({
+                                return res.status(403).send({
                                     message: errorHandler.getErrorMessage(err)
                                 });
                             }
