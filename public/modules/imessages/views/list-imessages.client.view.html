@@ -3,26 +3,39 @@
 		<h1>IMessages</h1>
 	</div>
 	<div class="list-group">
-		<a data-ng-repeat="imessage in imessages" data-ng-href="#!/imessages/{{imessage._id}}" class="list-group-item">
-			<h4 class="list-group-item-heading" data-ng-bind="imessage.title"></h4>
-			<p class="list-group-item-text" data-ng-bind="imessage.content"></p>
-            <small class="list-group-item-text">
-                <span data-ng-bind="imessage.created | date:'mediumDate'"></span>
-                <!--by
-                <span data-ng-bind="imessage.user.displayName"></span>
-                to
-                <span data-ng-bind="imessage.touser.displayName"></span>-->
-            </small>
-		</a>
+		<div data-ng-repeat="imessage in imessages" data-ng-href="#!/imessages/{{imessage._id}}" class="list-group-item">
+            <div ng-show="imessage.user === authentication.user._id || imessage.user._id === authentication.user._id" class="text-right">
+                <h4 class="list-group-item-heading" data-ng-bind="imessage.title"></h4>
+                <p class="list-group-item-text" data-ng-bind="imessage.content"></p>
+                <small class="list-group-item-text">
+                    <span data-ng-bind="imessage.created | date:'mediumDate'"></span>
+                    <!--by
+                    <span data-ng-bind="imessage.user.displayName"></span>
+                    to
+                    <span data-ng-bind="imessage.touser.displayName"></span>-->
+                </small>
+            </div>
+            <div ng-show="imessage.user !== authentication.user._id && imessage.user._id !== authentication.user._id" class="text-left">
+                <h4 class="list-group-item-heading" data-ng-bind="imessage.title"></h4>
+                <p class="list-group-item-text" data-ng-bind="imessage.content"></p>
+                <small class="list-group-item-text">
+                    <span data-ng-bind="imessage.created | date:'mediumDate'"></span>
+                    <!--by
+                    <span data-ng-bind="imessage.user.displayName"></span>
+                    to
+                    <span data-ng-bind="imessage.touser.displayName"></span>-->
+                </small>
+            </div>
+		</div>
         <ul class="pagination" ng-show="totalPage>1">
             <li ng-class="{true:'active'}[currentPage==1]"><a href="javascript:void(0)"
-                                                              ng-click="currentPage=1;load()">First</a></li>
+                                                              ng-click="currentPage=1;find()">First</a></li>
             <li ng-class="{true:'disabled'}[currentPage==1]"><a href="javascript:void(0);" ng-click="prev()">Prev</a></li>
             <li ng-repeat="page in pages"><a href="javascript:void(0);" ng-click="loadPage(page)">{{ page }}</a></li>
             <li ng-class="{true:'disabled'}[currentPage==totalPage]"><a href="javascript:void(0);" ng-click="next()">Next</a>
             </li>
             <li ng-class="{true:'active'}[currentPage==totalPage]"><a href="javascript:void(0)"
-                                                                      ng-click="currentPage=totalPage;load()">Last</a></li>
+                                                                      ng-click="currentPage=totalPage;find()">Last</a></li>
         </ul>
 	</div>
 	<div class="alert alert-warning text-center" data-ng-if="imessages.$resolved && !imessages.length">

@@ -1,14 +1,22 @@
 'use strict';
 
-angular.module('imessages').controller('IMessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'IMessages',
-	function($scope, $stateParams, $location, Authentication, IMessages) {
+angular.module('imessages').controller('IMessagesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'IMessages',
+	function($scope, $http, $stateParams, $location, Authentication, IMessages) {
 		$scope.authentication = Authentication;
+		//console.log($scope.authentication);
 
 		$scope.currentPage = 1;
 		$scope.totalPage = 1;
 		$scope.pageSize = 10;
 		$scope.pages = [];
 		$scope.endPage = 1;
+
+		$http.get('/imessages/count').success(function(response) {
+			$scope.totalCount = response;
+			$scope.totalPage = Math.ceil($scope.totalCount / $scope.pageSize);
+			$scope.currentPage = $scope.totalPage;
+			$scope.endPage = $scope.totalPage;
+		});
 
 		$scope.create = function() {
 			var imessage = new IMessages({
@@ -53,10 +61,7 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$state
 
 		$scope.find = function() {
 			$scope.imessages = IMessages.query({page: $scope.currentPage, pagesize:$scope.pageSize});
-
-			//$scope.totalPage = Math.ceil(data.count / $scope.pageSize);
-			$scope.totalPage = 2;
-			$scope.endPage = $scope.totalPage;
+			//console.log($scope.imessages);
 			//生成数字链接
 			if ($scope.currentPage > 1 && $scope.currentPage < $scope.totalPage) {
 				$scope.pages = [

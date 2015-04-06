@@ -86,6 +86,30 @@ exports.delete = function(req, res) {
 	});
 };
 
+exports.count = function(req, res) {
+	var userid = req.param('userid');
+	if(userid === undefined) {
+		userid = req.user._id;
+	}
+	User.findById(userid, function(err, user) {
+		if (!err && user) {
+			IMessage.count([{'touser': user.lover}, {'touser': user._id}], function (err, count) {
+				if (err) {
+					res.status(400).send({
+						message: errorHandler.getErrorMessage(err)
+					});
+				} else {
+					res.json(count);
+				}
+			});
+		} else {
+			res.status(400).send({
+				message: 'User is not found'
+			});
+		}
+	});
+};
+
 /**
  * List of Messages, touser must be the user or the user's lover
  */
@@ -100,7 +124,6 @@ exports.list = function(req, res) {
     User.findById(userid, function(err, user) {
         if (!err && user) {
 			var skipFrom = (page * pagesize) - pagesize;
-			var totalCount = IMessage.or([{'touser': user.lover}, {'touser': user._id}]).count();
             IMessage.find().sort('created').populate('user', 'displayName').populate('touser', 'displayName').or([{'touser': user.lover}, {'touser': user._id}]).skip(skipFrom).limit(pagesize).exec(function(err, imessages) {
                 if (err) {
                     return res.status(400).send({

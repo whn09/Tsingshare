@@ -8,6 +8,9 @@ var users = require('../../app/controllers/users.server.controller'),
 
 module.exports = function(app) {
 	// Instant message Routes
+	app.route('/imessages/count') // 注意要放到/imessages前面，否则会出现错误{"message":"IMessage is invalid"}
+		.get(imessages.count);
+
 	app.route('/imessages')
 		.get(imessages.list)
 		.post(users.requiresLogin, imessages.create);
