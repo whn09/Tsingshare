@@ -4,6 +4,12 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$state
 	function($scope, $stateParams, $location, Authentication, IMessages) {
 		$scope.authentication = Authentication;
 
+		$scope.currentPage = 1;
+		$scope.totalPage = 1;
+		$scope.pageSize = 10;
+		$scope.pages = [];
+		$scope.endPage = 1;
+
 		$scope.create = function() {
 			var imessage = new IMessages({
 				title: this.title,
@@ -46,13 +52,54 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$state
 		};
 
 		$scope.find = function() {
-			$scope.imessages = IMessages.query();
+			$scope.imessages = IMessages.query({page: $scope.currentPage, pagesize:$scope.pageSize});
+
+			//$scope.totalPage = Math.ceil(data.count / $scope.pageSize);
+			$scope.totalPage = 2;
+			$scope.endPage = $scope.totalPage;
+			//生成数字链接
+			if ($scope.currentPage > 1 && $scope.currentPage < $scope.totalPage) {
+				$scope.pages = [
+					$scope.currentPage - 1,
+					$scope.currentPage,
+					$scope.currentPage + 1
+				];
+			} else if ($scope.currentPage === 1 && $scope.totalPage > 1) {
+				$scope.pages = [
+					$scope.currentPage,
+					$scope.currentPage + 1
+				];
+			} else if ($scope.currentPage === $scope.totalPage && $scope.totalPage > 1) {
+				$scope.pages = [
+					$scope.currentPage - 1,
+					$scope.currentPage
+				];
+			}
 		};
 
 		$scope.findOne = function() {
 			$scope.imessage = IMessages.get({
                 imessageId: $stateParams.imessageId
 			});
+		};
+
+		$scope.next = function () {
+			if ($scope.currentPage < $scope.totalPage) {
+				$scope.currentPage++;
+				$scope.find();
+			}
+		};
+
+		$scope.prev = function () {
+			if ($scope.currentPage > 1) {
+				$scope.currentPage--;
+				$scope.find();
+			}
+		};
+
+		$scope.loadPage = function (page) {
+			$scope.currentPage = page;
+			$scope.find();
 		};
 	}
 ]);

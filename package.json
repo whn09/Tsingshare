@@ -48,7 +48,10 @@
 		"chalk": "~0.5",
 		"passport-http-bearer": ">= 0.0.0",
 		"jpush-sdk": "*",
-		"aliyun-sdk": "*"
+		"aliyun-sdk": "*",
+		"oauth2-provider": "1.x",
+		"mongoose-paginate": "*",
+		"express-paginate": "*"
 	},
 	"devDependencies": {
 		"supertest": "~0.14.0",

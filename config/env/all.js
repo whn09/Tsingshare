@@ -54,7 +54,10 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-                'public/lib/ng-table/dist/ng-table.js'
+                'public/lib/ng-table/dist/ng-table.js',
+				'public/lib/jQuery/dist/jquery.js',
+				'public/lib/bootstrap/dist/js/bootstrap.js',
+				'public/lib/bootstrap-paginator/src/bootstrap-paginator.js'
 			]
 		},
 		css: [

@@ -3,6 +3,7 @@
 	"version": "0.3.2",
 	"description": "Fullstack JavaScript with MongoDB, Express, AngularJS, and Node.js.",
 	"dependencies": {
+		"jQuery": "~2",
 		"bootstrap": "~3",
 		"angular": "~1.2",
 		"angular-resource": "~1.2",
@@ -15,6 +16,7 @@
 		"angular-bootstrap-datetimepicker": "latest",
 		"ng-file-upload-shim": "latest",
 		"ng-file-upload": "latest",
-        "ng-table": "latest"
+        "ng-table": "latest",
+		"bootstrap-paginator": "latest"
 	}
 }

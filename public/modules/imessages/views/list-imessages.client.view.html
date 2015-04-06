@@ -14,6 +14,16 @@
                 <span data-ng-bind="imessage.touser.displayName"></span>-->
             </small>
 		</a>
+        <ul class="pagination" ng-show="totalPage>1">
+            <li ng-class="{true:'active'}[currentPage==1]"><a href="javascript:void(0)"
+                                                              ng-click="currentPage=1;load()">First</a></li>
+            <li ng-class="{true:'disabled'}[currentPage==1]"><a href="javascript:void(0);" ng-click="prev()">Prev</a></li>
+            <li ng-repeat="page in pages"><a href="javascript:void(0);" ng-click="loadPage(page)">{{ page }}</a></li>
+            <li ng-class="{true:'disabled'}[currentPage==totalPage]"><a href="javascript:void(0);" ng-click="next()">Next</a>
+            </li>
+            <li ng-class="{true:'active'}[currentPage==totalPage]"><a href="javascript:void(0)"
+                                                                      ng-click="currentPage=totalPage;load()">Last</a></li>
+        </ul>
 	</div>
 	<div class="alert alert-warning text-center" data-ng-if="imessages.$resolved && !imessages.length">
 		No imessages yet, why don't you <a href="/#!/imessages/create">create one</a>?

@@ -25,7 +25,7 @@ exports.create = function(req, res) {
         touserid = req.user.lover;
     }
     var content = req.param('content');
-    if(content != undefined) {
+    if(content !== undefined) {
         imessage.content = content;
     }
 
@@ -92,12 +92,16 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 
     var userid = req.param('userid');
+	var page = req.param('page')||1;
+	var pagesize = req.param('pagesize')||10;
     if(userid === undefined) {
         userid = req.user._id;
     }
     User.findById(userid, function(err, user) {
         if (!err && user) {
-            IMessage.find().sort('created').populate('user', 'displayName').populate('touser', 'displayName').or([{'touser': user.lover}, {'touser': user._id}]).exec(function(err, imessages) {
+			var skipFrom = (page * pagesize) - pagesize;
+			var totalCount = IMessage.or([{'touser': user.lover}, {'touser': user._id}]).count();
+            IMessage.find().sort('created').populate('user', 'displayName').populate('touser', 'displayName').or([{'touser': user.lover}, {'touser': user._id}]).skip(skipFrom).limit(pagesize).exec(function(err, imessages) {
                 if (err) {
                     return res.status(400).send({
                         message: errorHandler.getErrorMessage(err)
