@@ -13,7 +13,8 @@ module.exports = function(app) {
 
 	app.route('/imessages')
 		.get(imessages.list)
-		.post(users.requiresLogin, imessages.create);
+		//.post(users.requiresLogin, imessages.create);
+		.post(imessages.create);
 
 	app.route('/imessages/:imessageId')
 		.get(imessages.read)

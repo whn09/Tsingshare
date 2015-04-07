@@ -54,7 +54,8 @@
 		"express-paginate": "*",
 		"socket.io": "*",
 		"angularjs-scroll-glue": "*",
-		"nodemailer-smtp-transport": "*"
+		"nodemailer-smtp-transport": "*",
+		"apn": "*"
 	},
 	"devDependencies": {
 		"supertest": "~0.14.0",

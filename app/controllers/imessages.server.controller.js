@@ -9,6 +9,23 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User'),
 	_ = require('lodash');
 
+/*var JPush = require('node_modules/jpush-sdk/lib/JPush/JPush.js');
+var client = JPush.buildClient('bc3d97771da3e62535150191', 'f7cfadf2b88754b55eb0606d');
+
+client.push().setPlatform('ios', 'android')
+	.setAudience(JPush.tag('555', '666'), JPush.alias('666,777'))
+	.setNotification('Hi, JPush', JPush.ios('ios alert'), JPush.android('android alert', null, 1))
+	.setMessage('msg content')
+	.setOptions(null, 60)
+	.send(function(err, res) {
+		if (err) {
+			console.log(err.message);
+		} else {
+			console.log('Sendno: ' + res.sendno);
+			console.log('Msg_id: ' + res.msg_id);
+		}
+	});*/
+
 /**
  * Create an instant message (imessage for short)
  */
