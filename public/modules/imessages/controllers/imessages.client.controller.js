@@ -75,8 +75,6 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$http'
 		};
 
 		$scope.find = function() {
-			console.log($scope.currentPage);
-			console.log($scope.totalCount);
 			$scope.imessages = IMessages.query({page: $scope.currentPage, pagesize:$scope.pageSize});
 			//console.log($scope.imessages);
 			//生成数字链接
