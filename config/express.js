@@ -22,11 +22,18 @@ var fs = require('fs'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
-	path = require('path');
+	path = require('path'),
+	socketio = require('socket.io');
 
 module.exports = function(db) {
 	// Initialize express app
 	var app = express();
+
+	// Attach Socket.io
+	var server = http.createServer(app);
+	var io = socketio.listen(server);
+	app.set('socketio', io);
+	app.set('server', server);
 
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {

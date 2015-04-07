@@ -51,7 +51,9 @@
 		"aliyun-sdk": "*",
 		"oauth2-provider": "1.x",
 		"mongoose-paginate": "*",
-		"express-paginate": "*"
+		"express-paginate": "*",
+		"socket.io": "*",
+		"angularjs-scroll-glue": "*"
 	},
 	"devDependencies": {
 		"supertest": "~0.14.0",

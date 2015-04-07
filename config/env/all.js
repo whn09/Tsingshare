@@ -57,7 +57,9 @@ module.exports = {
                 'public/lib/ng-table/dist/ng-table.js',
 				'public/lib/jQuery/dist/jquery.js',
 				'public/lib/bootstrap/dist/js/bootstrap.js',
-				'public/lib/bootstrap-paginator/src/bootstrap-paginator.js'
+				'public/lib/bootstrap-paginator/src/bootstrap-paginator.js',
+				'public/lib/angular-socket-io/socket.js',
+				'public/lib/angular-scroll-glue/src/scrollglue.js'
 			]
 		},
 		css: [

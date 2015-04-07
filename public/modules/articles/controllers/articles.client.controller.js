@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Articles',
-	function($scope, $http, $stateParams, $location, Authentication, Articles) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$http', '$stateParams', '$location', 'Socket', 'Authentication', 'Articles',
+	function($scope, $http, $stateParams, $location, Socket, Authentication, Articles) {
 		$scope.authentication = Authentication;
 
 		$scope.create = function() {
@@ -18,6 +18,10 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$http', 
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		Socket.on('article.created', function(article) {
+			console.log(article);
+		});
 
 		$scope.remove = function(article) {
 			if (article) {

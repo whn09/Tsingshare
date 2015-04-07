@@ -38,6 +38,8 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
+			socketio.sockets.emit('imessage.created', imessage); // emit an event for all connected clients
 			res.json(imessage);
 		}
 	});
@@ -93,7 +95,8 @@ exports.count = function(req, res) {
 	}
 	User.findById(userid, function(err, user) {
 		if (!err && user) {
-			IMessage.count([{'touser': user.lover}, {'touser': user._id}], function (err, count) {
+			//IMessage.count([{'touser': user.lover}, {'touser': user._id}], function (err, count) {
+			IMessage.find().or([{'touser': user.lover}, {'touser': user._id}]).count(function (err, count) {
 				if (err) {
 					res.status(400).send({
 						message: errorHandler.getErrorMessage(err)
@@ -114,16 +117,17 @@ exports.count = function(req, res) {
  * List of Messages, touser must be the user or the user's lover
  */
 exports.list = function(req, res) {
-
     var userid = req.param('userid');
 	var page = req.param('page')||1;
 	var pagesize = req.param('pagesize')||10;
+	//console.log("page = "+page);
     if(userid === undefined) {
         userid = req.user._id;
     }
     User.findById(userid, function(err, user) {
         if (!err && user) {
 			var skipFrom = (page * pagesize) - pagesize;
+			console.log(skipFrom);
             IMessage.find().sort('created').populate('user', 'displayName').populate('touser', 'displayName').or([{'touser': user.lover}, {'touser': user._id}]).skip(skipFrom).limit(pagesize).exec(function(err, imessages) {
                 if (err) {
                     return res.status(400).send({

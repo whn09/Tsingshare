@@ -17,6 +17,8 @@
 		"ng-file-upload-shim": "latest",
 		"ng-file-upload": "latest",
         "ng-table": "latest",
-		"bootstrap-paginator": "latest"
+		"bootstrap-paginator": "latest",
+		"angular-socket-io": "latest",
+		"angular-scroll-glue": "latest"
 	}
 }

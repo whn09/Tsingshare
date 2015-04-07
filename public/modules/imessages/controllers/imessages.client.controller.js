@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('imessages').controller('IMessagesController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'IMessages',
-	function($scope, $http, $stateParams, $location, Authentication, IMessages) {
+angular.module('imessages').controller('IMessagesController', ['$scope', '$http', '$stateParams', '$location', 'Socket', 'Authentication', 'IMessages',
+	function($scope, $http, $stateParams, $location, Socket, Authentication, IMessages) {
 		$scope.authentication = Authentication;
 		//console.log($scope.authentication);
 
@@ -11,12 +11,15 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$http'
 		$scope.pages = [];
 		$scope.endPage = 1;
 
-		$http.get('/imessages/count').success(function(response) {
-			$scope.totalCount = response;
-			$scope.totalPage = Math.ceil($scope.totalCount / $scope.pageSize);
-			$scope.currentPage = $scope.totalPage;
-			$scope.endPage = $scope.totalPage;
-		});
+		$scope.init = function() {
+			$http.get('/imessages/count').success(function(response) {
+				$scope.totalCount = response;
+				$scope.totalPage = Math.ceil($scope.totalCount / $scope.pageSize);
+				$scope.currentPage = $scope.totalPage;
+				$scope.endPage = $scope.totalPage;
+				$scope.find();
+			});
+		};
 
 		$scope.create = function() {
 			var imessage = new IMessages({
@@ -25,13 +28,25 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$http'
 			});
             imessage.$save(function(response) {
 				//$location.path('imessages/' + response._id);
-                $scope.imessages.push(response);
+                //$scope.imessages.push(response); // change to Socket.on
 				$scope.title = '';
 				$scope.content = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		$scope.enter = function(ev) {
+			//console.log(ev.keyCode);
+			if (ev.keyCode === 13) {
+				$scope.create();
+			}
+		};
+
+		Socket.on('imessage.created', function(imessage) {
+			$scope.imessages.push(imessage);
+			//alert(imessage);
+		});
 
 		$scope.remove = function(imessage) {
 			if (imessage) {
@@ -60,6 +75,8 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$http'
 		};
 
 		$scope.find = function() {
+			console.log($scope.currentPage);
+			console.log($scope.totalCount);
 			$scope.imessages = IMessages.query({page: $scope.currentPage, pagesize:$scope.pageSize});
 			//console.log($scope.imessages);
 			//生成数字链接
