@@ -53,7 +53,8 @@
 		"mongoose-paginate": "*",
 		"express-paginate": "*",
 		"socket.io": "*",
-		"angularjs-scroll-glue": "*"
+		"angularjs-scroll-glue": "*",
+		"nodemailer-smtp-transport": "*"
 	},
 	"devDependencies": {
 		"supertest": "~0.14.0",

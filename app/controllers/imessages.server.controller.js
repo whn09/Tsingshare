@@ -127,7 +127,7 @@ exports.list = function(req, res) {
     User.findById(userid, function(err, user) {
         if (!err && user) {
 			var skipFrom = (page * pagesize) - pagesize;
-			console.log(skipFrom);
+			//console.log(skipFrom);
             IMessage.find().sort('created').populate('user', 'displayName').populate('touser', 'displayName').or([{'touser': user.lover}, {'touser': user._id}]).skip(skipFrom).limit(pagesize).exec(function(err, imessages) {
                 if (err) {
                     return res.status(400).send({

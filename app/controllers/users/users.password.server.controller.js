@@ -11,9 +11,11 @@ var _ = require('lodash'),
 	config = require('../../../config/config'),
 	nodemailer = require('nodemailer'),
 	async = require('async'),
-	crypto = require('crypto');
+	crypto = require('crypto'),
+	smtpTransport = require('nodemailer-smtp-transport');
 	
-var smtpTransport = nodemailer.createTransport(config.mailer.options);
+//var smtpTransport = nodemailer.createTransport(config.mailer.options);
+var transporter = nodemailer.createTransport(smtpTransport(config.mailer.options));
 
 /**
  * Forgot for reset password (forgot POST)
@@ -73,12 +75,15 @@ exports.forgot = function(req, res, next) {
 				subject: 'Password Reset',
 				html: emailHTML
 			};
-			smtpTransport.sendMail(mailOptions, function(err) {
+			//console.log(mailOptions);
+			transporter.sendMail(mailOptions, function(err) {
 				if (!err) {
+					console.log('An email has been sent to ' + user.email + ' with further instructions.');
 					res.send({
 						message: 'An email has been sent to ' + user.email + ' with further instructions.'
 					});
 				} else {
+					console.log('Failure sending email');
 					return res.status(400).send({
 						message: 'Failure sending email'
 					});
@@ -179,7 +184,7 @@ exports.reset = function(req, res, next) {
 				html: emailHTML
 			};
 
-			smtpTransport.sendMail(mailOptions, function(err) {
+			transporter.sendMail(mailOptions, function(err) {
 				done(err, 'done');
 			});
 		}

@@ -46,9 +46,11 @@ module.exports = {
 		callbackURL: '/auth/github/callback'
 	},
 	mailer: {
-		from: process.env.MAILER_FROM || 'MAILER_FROM',
+		from: process.env.MAILER_FROM || '{"Henan Wang": "15210588630@163.com"}',
 		options: {
-			service: process.env.MAILER_SERVICE_PROVIDER || '163', /*TODO this configuration maybe wrong*/
+			service: process.env.MAILER_SERVICE_PROVIDER || 'smtp.163.com', /*TODO this configuration maybe wrong*/
+			host: 'smtp.163.com',
+			port: 25,
 			auth: {
 				user: process.env.MAILER_EMAIL_ID || '15210588630@163.com',
 				pass: process.env.MAILER_PASSWORD || 'whn159024'
