@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
+    nodeApn = require('./nodeapn.server.controller'),
 	IMessage = mongoose.model('IMessage'),
     User = mongoose.model('User'),
 	_ = require('lodash');
@@ -55,8 +56,16 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
+			// TODO 现在的实现方法是对所有用户广播，这样是不对的，主要是增加了服务器负载（因为可以在客户端识别是否是广播给自己的，所以可以避免广播错误），要修改
 			var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
 			socketio.sockets.emit('imessage.created', imessage); // emit an event for all connected clients
+
+            User.findById(touserid, function(err, touser) {
+                if (!err && touser) {
+                    nodeApn.pushOneNotification(touser.ios_token);
+                }
+            });
+
 			res.json(imessage);
 		}
 	});
