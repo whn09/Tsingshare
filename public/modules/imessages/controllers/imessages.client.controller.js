@@ -36,12 +36,12 @@ angular.module('imessages').controller('IMessagesController', ['$scope', '$http'
 			});
 		};
 
-		$scope.enter = function(ev) {
+		/*$scope.enter = function(ev) {
 			//console.log(ev.keyCode);
 			if (ev.keyCode === 13) {
 				$scope.create();
 			}
-		};
+		};*/
 
 		Socket.on('imessage.created', function(imessage) {
 			$scope.imessages.push(imessage);

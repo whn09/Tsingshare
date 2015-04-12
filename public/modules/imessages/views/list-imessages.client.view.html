@@ -40,9 +40,9 @@
                                                                       ng-click="currentPage=totalPage;find()">Last</a></li>
         </ul>
 	</div>
-	<div class="alert alert-warning text-center" data-ng-if="imessages.$resolved && !imessages.length">
+	<!--<div class="alert alert-warning text-center" data-ng-if="imessages.$resolved && !imessages.length">
 		No imessages yet, why don't you <a href="/#!/imessages/create">create one</a>?
-	</div>
+	</div>-->
 <!--</section>
 <section data-ng-controller="IMessagesController">-->
     <!--<div class="page-header">
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <!--<label class="control-label" for="content">Content</label>-->
                     <div class="controls">
-                        <textarea name="content" data-ng-model="content" id="content" class="form-control" cols="30" rows="5" placeholder="Content" required ng-keypress="enter($event)"></textarea>
+                        <input type="text" name="content" data-ng-model="content" id="content" class="form-control" placeholder="Content" required style="height:100px;width:100%;"/>
                     </div>
                 </div>
                 <div class="form-group">
