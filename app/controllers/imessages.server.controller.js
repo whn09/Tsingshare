@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
     nodeApn = require('./nodeapn.server.controller'),
+    nodeBaiduPush = require('./nodebaidupush.server.controller'),
 	IMessage = mongoose.model('IMessage'),
     User = mongoose.model('User'),
 	_ = require('lodash');
@@ -62,7 +63,12 @@ exports.create = function(req, res) {
 
             User.findById(touserid, function(err, touser) {
                 if (!err && touser) {
-                    nodeApn.pushOneNotification(touser.ios_token);
+                    if(touser.ios_token !== '') {
+                        nodeApn.pushOneNotification(touser.ios_token);
+                    }
+                    if(touser.android_token !== '') {
+                        //nodeBaiduPush.
+                    }
                 }
             });
 

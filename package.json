@@ -55,7 +55,8 @@
 		"socket.io": "*",
 		"angularjs-scroll-glue": "*",
 		"nodemailer-smtp-transport": "*",
-		"apn": "*"
+		"apn": "*",
+		"node-gcm": "*"
 	},
 	"devDependencies": {
 		"supertest": "~0.14.0",
