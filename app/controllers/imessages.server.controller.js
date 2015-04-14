@@ -11,6 +11,13 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User'),
 	_ = require('lodash');
 
+var opt = {
+    ak: 'U47w6dK9HILqvqFzcTg051Zs',
+    sk: 'Ui7m92ce93DzLqpOVkyC7ocyGtvi2ZNK'
+
+};
+var client = new nodeBaiduPush(opt);
+
 /*var JPush = require('node_modules/jpush-sdk/lib/JPush/JPush.js');
 var client = JPush.buildClient('bc3d97771da3e62535150191', 'f7cfadf2b88754b55eb0606d');
 
@@ -67,7 +74,8 @@ exports.create = function(req, res) {
                         nodeApn.pushOneNotification(touser.ios_token);
                     }
                     if(touser.android_token !== '') {
-                        //nodeBaiduPush.
+                        //queryBindList(client, touser.android_token);
+                        pushMsg(client, touser.android_token);
                     }
                 }
             });
@@ -211,3 +219,32 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+function queryBindList(client, userid) {
+    var opt = {
+        user_id: userid
+    }
+    client.queryBindList(opt, function(err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(result);
+    })
+}
+
+function pushMsg(client, userid) {
+    var opt = {
+        push_type: 1,
+        user_id: userid,
+        messages: JSON.stringify(["hello, push0", "hello, push1", "hello, push2"]),
+        msg_keys: JSON.stringify(["key0", "key1", "key2"])
+    }
+    client.pushMsg(opt, function(err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(result);
+    })
+}
