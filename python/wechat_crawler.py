@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #-*-coding:utf-8-*-
 
-import pymongo
+import pymongo # pip install pymongo==2.8
 import random
 import urllib
 import urllib2
