@@ -20,6 +20,7 @@ module.exports = function(app) {
 		.get(dw_r_min_lines.read);
 
     app.route('/dw_r_min_lines/batchread')
-        .get(dw_r_min_lines.batchread);
+        .get(dw_r_min_lines.batchread)
+        .post(dw_r_min_lines.batchread);
 
 };
