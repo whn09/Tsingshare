@@ -9,11 +9,17 @@ var mongoose = require('mongoose'),
     User = mongoose.model('User'),
 	_ = require('lodash');
 
-/**
- * Show the current instant message
- */
 exports.read = function(req, res) {
-	//res.json(req.imessage);
+    var resourceId = req.param('resourceId');
+    DW_R_MIN_LINE.find({'RESOURCEID':resourceId}).sort({'_id':-1}).limit(1).exec(function(err, results) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(results);
+        }
+    });
 };
 
 exports.count = function(req, res) {
@@ -28,9 +34,22 @@ exports.count = function(req, res) {
 			});
 };
 
-/**
- * List of Messages, touser must be the user or the user's lover
- */
+exports.create = function(req, res) {
+
+    var dw_r_min_line = new DW_R_MIN_LINE(req.body);
+    dw_r_min_line.I = 1;
+
+    dw_r_min_line.save(function(err) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(dw_r_min_line);
+        }
+    });
+};
+
 exports.list = function(req, res) {
            DW_R_MIN_LINE.find().limit(100).exec(function(err, results) {
                 if (err) {

@@ -11,28 +11,36 @@ var mongoose = require('mongoose'),
  */
 var DW_R_MIN_LINESchema = new Schema({
 	MW_UPDATE: {
-		type: Date
+		type: Date,
+        default: Date.now
 	},
 	RESOURCEID: {
-		type: String
+		type: String,
+        default: '1'
 	},
 	T_ID: {
-		type: Date
+		type: Date,
+        default: Date.now
 	},
 	I: {
-		type: Number
+		type: Number,
+        default: 0
 	},
 	MW: {
-		type: Number
+		type: Number,
+        default: 0
 	},
 	MX: {
-		type: Number
+		type: Number,
+        default: 0
 	},
 	LAST_UPDATE: {
-		type: Date
+		type: Date,
+        default: Date.now
 	},
 	MX_UPDATE: {
-		type: Date
+		type: Date,
+        default: Date.now
 	}
 });
 
