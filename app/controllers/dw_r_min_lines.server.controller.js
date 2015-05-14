@@ -22,6 +22,20 @@ exports.read = function(req, res) {
     });
 };
 
+exports.batchread = function(req, res) {
+    var resourceIds = req.param('resourceIds');
+    var resourceIdsArr = resourceIds.split(',');
+    DW_R_MIN_LINE.find({'RESOURCEID':{$in:resourceIdsArr}}).exec(function(err, results) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(results);
+        }
+    });
+};
+
 exports.count = function(req, res) {
 		DW_R_MIN_LINE.find().count(function (err, count) {
 				if (err) {

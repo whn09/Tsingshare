@@ -22,6 +22,20 @@ exports.read = function(req, res) {
     });
 };
 
+exports.batchread = function(req, res) {
+    var d5000Ids = req.param('d5000Ids');
+    var d5000IdsArr = d5000Ids.split(',');
+    UIP_SYS_MEASUREMENT.find({'D5000ID':{$in:d5000IdsArr}}).exec(function(err, results) {
+        if (err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.json(results);
+        }
+    });
+};
+
 exports.count = function(req, res) {
     UIP_SYS_MEASUREMENT.find().count(function (err, count) {
 				if (err) {

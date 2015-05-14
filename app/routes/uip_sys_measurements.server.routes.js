@@ -16,4 +16,7 @@ module.exports = function(app) {
 	app.route('/uip_sys_measurements/read')
 		.get(uip_sys_measurements.read);
 
+    app.route('/uip_sys_measurements/batchread')
+        .get(uip_sys_measurements.batchread);
+
 };
